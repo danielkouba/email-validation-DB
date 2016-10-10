@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Success</title>
+	<link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+</head>
+<body>
+	{% with success = get_flashed_messages(category_filter=["success"]) %}
+		{% if success %}
+		    {%- for msg in success %}
+		    <p>{{ msg }}</p>
+		    {% endfor -%}
+		{% endif %}
+	{% endwith %}
+	
+	<h2>Email addresses entered:</h2>
+	{%for email in all_emails%}
+	<div class="line">
+		<p>{{ email["email"] + " " + email["created_at"].strftime(' %m/%d/%Y') }}</p>
+		<a href="/remove/{{email['id']}}"><button>Delete</button></a>
+	</div>
+	{%endfor%}
+</body>
+</html>
